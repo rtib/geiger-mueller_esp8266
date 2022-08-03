@@ -3,9 +3,9 @@
 #include <ESP8266TimerInterrupt.h>
 
 #include <gmCounter.h>
+#include <version.h>
 #include "display.cpp"
 
-#define VERSION "1.0"
 #define GM_PULSE_GPIO 2
 
 ESP8266Timer timer;
