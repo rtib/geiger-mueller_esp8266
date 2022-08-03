@@ -9,8 +9,8 @@
 #define GM_PULSE_GPIO 2
 
 ESP8266Timer timer;
-gmCounter counter(GM_TUBE_J305_CI);
-Display display(VERSION);
+gmCounter counter(GM_TUBE_J305_CI, 190);
+Display display(VERSION_SHORT);
 
 IRAM_ATTR void gmPulse() {
   counter.tubePulse();
@@ -48,8 +48,8 @@ void loop() {
     display.initScreen(counter.getRemainingInit(), COUNTER_BUCKETS);
   }
   else {
-    Serial.printf("\tcpm: %ld\texposure: %lf uSv/h", counter.getCPM(), counter.calcExposure());
-    display.runDisplay(counter.calcExposure(), counter.calcDose(), counter.getCPM());
+    Serial.printf("\tcpm: %ld\tdoseRate: %lf uSv/h", counter.getCPM(), counter.calcDoseRate());
+    display.runDisplay(counter.calcDoseRate(), counter.calcDose(), counter.getCPM());
   }
   Serial.println();
 }

@@ -1,12 +1,13 @@
 #include "gmCounter.hpp"
 
-gmCounter::gmCounter(int conversionIndex = 0) {
+gmCounter::gmCounter(int conversionIndex = 0, double deadTime_us = 0.0) {
   counts = 0;
   for (int i = 0; i < COUNTER_BUCKETS; i++)
     bucket[i] = 0;
   current_bucket = 0;
   init = COUNTER_BUCKETS;
   convIdx = conversionIndex;
+  deadTime = deadTime_us;
 }
 
 void gmCounter::bucketSwitch() {
@@ -30,6 +31,10 @@ unsigned long gmCounter::getCPM() {
   return cpm;
 }
 
+double gmCounter::compensateDeadTime(unsigned long countbase) {
+  return countbase * (1.0 - (double)countbase * deadTime / 1000000.0);
+}
+
 void gmCounter::tubePulse() {
   counts++;
   bucket[current_bucket]++;
@@ -43,6 +48,6 @@ double gmCounter::calcDose() {
   return (double)counts / (double)(convIdx * 60);
 }
 
-double gmCounter::calcExposure() {
-  return (double)getCPM() / (double)convIdx;
+double gmCounter::calcDoseRate() {
+  return compensateDeadTime(getCPM()) / (double)convIdx;
 }
