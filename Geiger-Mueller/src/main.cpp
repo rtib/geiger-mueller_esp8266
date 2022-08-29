@@ -27,7 +27,7 @@ void setup() {
   delay(500);
 
   Serial.println(F("\n"));
-  Serial.print(F("Geiger-Mueller counter V")); Serial.println(VERSION);
+  Serial.print(F("Geiger-Mueller counter ")); Serial.println(VERSION);
 
   attachInterrupt(GM_PULSE_GPIO, gmPulse, FALLING);
   Serial.println(F("Counter started."));

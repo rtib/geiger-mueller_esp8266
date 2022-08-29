@@ -45,7 +45,7 @@ class Display {
       u8g2.setFont(u8g2_font_smart_patrol_nbp_tf);
       u8g2.drawStr(10, 10, "Geiger-M\xFCller");
       u8g2.setFont(u8g2_font_profont11_tr);
-      u8g2.drawStr(25, 21, "Version");
-      u8g2.drawStr(80, 21, versionString);
+      u8g2.drawStr(20, 21, "Version");
+      u8g2.drawStr(70, 21, versionString);
     }
 };
